@@ -51,12 +51,12 @@ def sortDirs(srcDir):
         else:
           newPath = os.path.join(srcDir, cTY, cTm,
             cTY + cTm + cTd)
-        print 'old path: %s' % fullPath
-        print 'new path: %s' % newPath
-        print ''
+        print('old path: %s' % fullPath)
+        print('new path: %s' % newPath)
+        print('')
         os.renames(fullPath, newPath)
     except OSError as exc:
-      print 'OSError...'
+      print('OSError...')
   return
 
 ###############################################################################
@@ -69,12 +69,12 @@ def sortFiles(ext, srcDir, recurse = False):
   srcDir = srcDir.replace('\\', '/')
   # Find out the base name of the directory.
   baseName = os.path.basename(srcDir)
-  print 'Looking in srcDir: %s' % (srcDir)
+  print('Looking in srcDir: %s' % (srcDir))
   # Get a listing of the different files/directories in the source directory.
   dirListing = os.listdir(srcDir)
   # Validate params.
   if ext is None or srcDir is None:
-    print 'Invalid extension or source directory.'
+    print('Invalid extension or source directory.')
     return
   # Then go through each listing.
   for listing in iter(dirListing):
@@ -97,7 +97,7 @@ def sortFiles(ext, srcDir, recurse = False):
           cTm = time.strftime("%m", time.localtime(s[stat.ST_MTIME]))
           # The modified day.
           cTd = time.strftime("%d", time.localtime(s[stat.ST_MTIME]))
-          print 'baseName != cTY: %s != %s' % (baseName, cTY)
+          print('baseName != cTY: %s != %s' % (baseName, cTY))
           # see if we are inside a directory labeled as the "year".
           if baseName != cTY:
             path = os.path.join(srcDir, cTY, cTm, cT)
@@ -109,15 +109,16 @@ def sortFiles(ext, srcDir, recurse = False):
           createDirTree(path)
           # Finally move the file to the new location.
           os.rename(fullFilePath, newFile)
-          print 'newFile: %s' % newFile
-          print 'path: %s' % path
-          print ' File: %s' % listing
-          print '  state.st_mtime: %s' % (cT)
-          print '    Year.: %s' % cTY
-          print '    Month: %s' % cTm
-          print '    Day..: %s' % cTd
-    except OSError as (errno, strerror):
-      print ' OS Error ({0}): file {1}, error: {2}'.format(errno,listing,strerror)
+          print('newFile: %s' % newFile)
+          print('path: %s' % path)
+          print(' File: %s' % listing)
+          print('  state.st_mtime: %s' % (cT))
+          print('    Year.: %s' % cTY)
+          print('    Month: %s' % cTm)
+          print('    Day..: %s' % cTd)
+    except OSError as xxx_todo_changeme:
+      (errno, strerror) = xxx_todo_changeme.args
+      print(' OS Error ({0}): file {1}, error: {2}'.format(errno,listing,strerror))
   return
 
 ###############################################################################
@@ -125,12 +126,12 @@ def sortFiles(ext, srcDir, recurse = False):
 # Remarks.: 
 #
 def usage():
-  print 'python fileSort.py {ext} {dir}'
-  print ''
-  print '  ext - Extension to sort (e.g. .txt)'
-  print '  dir - Directory to search.'
-  print ''
-  print ''
+  print('python fileSort.py {ext} {dir}')
+  print('')
+  print('  ext - Extension to sort (e.g. .txt)')
+  print('  dir - Directory to search.')
+  print('')
+  print('')
   return
 
 ###############################################################################
